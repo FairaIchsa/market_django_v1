@@ -1,0 +1,64 @@
+from django.db import models
+
+
+class Category(models.Model):
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    name = models.CharField(max_length=255, verbose_name='Название категории')
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Subcategory(models.Model):
+    class Meta:
+        verbose_name_plural = 'Subcategories'
+
+    category = models.ForeignKey(Category, verbose_name='Категория', related_name='subcategories',
+                                 on_delete=models.CASCADE)
+    # или стоит привязать к продукту напрямую?
+    name = models.CharField(max_length=255, verbose_name='Название подкатегории')
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Sale(models.Model):
+    class Meta:
+        verbose_name_plural = 'Sales'
+
+    is_active = models.BooleanField(default=True)
+    sale_modifier = models.PositiveIntegerField(default=0)      # ограничить числом 100
+
+
+class Status(models.Model):
+    class Meta:
+        verbose_name_plural = 'Statuses'
+
+    name = models.CharField(max_length=255, verbose_name='Название')
+    text = models.TextField(verbose_name='Статус')
+
+
+class Product(models.Model):
+    class Meta:
+        verbose_name_plural = 'Products'
+
+    category = models.ForeignKey(Category, verbose_name='Категория', related_name='products', on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, verbose_name='Подкатегория', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, verbose_name='Название')
+    slug = models.SlugField(unique=True)
+    description = models.TextField(verbose_name='Описание')
+    price = models.DecimalField(default=0, max_digits=9, decimal_places=2, verbose_name='Цена')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='Товаров на складе')
+    sale = models.ForeignKey(Sale, verbose_name='Скидка', null=True, blank=True, on_delete=models.SET_NULL)
+    is_popular = models.BooleanField(default=False)
+    status = models.ForeignKey(Status, verbose_name='Статус', null=True, blank=True, on_delete=models.SET_NULL)
+    # content = models.JSONField
+    image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return "{}: {}".format(self.category.name, self.name)
+
