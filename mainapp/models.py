@@ -23,15 +23,18 @@ class Subcategory(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return self.name
+        return "{}: {}".format(self.category.name, self.name)
 
 
-class Sale(models.Model):
+class Sale(models.Model):   # мб имеет смысл добавить поле name?
     class Meta:
         verbose_name_plural = 'Sales'
 
     is_active = models.BooleanField(default=True)
     sale_modifier = models.PositiveIntegerField(default=0)      # ограничить числом 100
+
+    def __str__(self):
+        return "{}%: {}".format(self.sale_modifier, "active" if self.is_active else "not active")
 
 
 class Status(models.Model):
@@ -40,6 +43,9 @@ class Status(models.Model):
 
     name = models.CharField(max_length=255, verbose_name='Название')
     text = models.TextField(verbose_name='Статус')
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
