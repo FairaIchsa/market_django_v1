@@ -63,8 +63,18 @@ class Product(models.Model):
     is_popular = models.BooleanField(default=False)
     status = models.ForeignKey(Status, verbose_name='Статус', null=True, blank=True, on_delete=models.SET_NULL)
     # content = models.JSONField
-    image = models.ImageField(null=True, blank=True)
+    image = models.URLField(verbose_name='Основное изображение', null=True, blank=True)
 
     def __str__(self):
         return "{}: {}".format(self.category.name, self.name)
 
+
+class SubImage(models.Model):
+    class Meta:
+        verbose_name_plural = 'Sub Images'
+
+    product = models.ForeignKey(Product, verbose_name='Товар', related_name='images', on_delete=models.CASCADE)
+    sub_image = models.URLField(verbose_name='Дополнительное изображение', null=True, blank=True)
+
+    def __str__(self):
+        return "SubImage {} for {}".format(self.id, self.product)

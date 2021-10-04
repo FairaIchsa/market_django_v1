@@ -4,7 +4,7 @@ from .serializers import *
 from ...models import *
 
 
-class ProductListApiView(ListAPIView):
+class ProductListApiView(ListAPIView):  # добавить пагинацию
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
 
