@@ -6,8 +6,8 @@ from ...models import *
 class MenuCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuCategory
-        fields = [
-            'name', 'url',
+        exclude = [
+            'id',
         ]
 
 
@@ -18,3 +18,11 @@ class CategoryListSerializer(serializers.ModelSerializer):
             'name', 'slug', 'subcategories',
         ]
         depth = 1
+
+
+class SliderInfoListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SliderInfo
+        exclude = [
+            'id',
+        ]

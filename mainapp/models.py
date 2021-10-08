@@ -12,6 +12,18 @@ class MenuCategory(models.Model):
         return self.name
 
 
+class SliderInfo(models.Model):
+    class Meta:
+        verbose_name_plural = 'Slider info'
+
+    name = models.CharField(max_length=255, verbose_name='Название')
+    image = models.URLField(verbose_name='Изображение')
+    text = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
