@@ -78,3 +78,30 @@ class SubImage(models.Model):
 
     def __str__(self):
         return "SubImage {} for {}".format(self.id, self.product)
+
+
+# class ChildProductData(models.Model):
+#     class Meta:
+#         abstract = True
+#
+#     product = models.OneToOneField(Product, verbose_name='Товар', related_name='child_product_data',
+#                                    on_delete=models.CASCADE)
+#
+#     def __str__(self):
+#         return f"{self.product.category.name}: {self.product.name}"
+#
+#
+# class Ball(ChildProductData):
+#     class Meta:
+#         verbose_name_plural = 'Balls'
+#
+#     size = models.PositiveIntegerField(verbose_name='Размер')
+#
+#
+# class TennisTable(ChildProductData):
+#     class Meta:
+#         verbose_name_plural = 'Tennis tables'
+#
+#     foldable = models.BooleanField(default=False, verbose_name='Складной')
+#     folded_size = models.CharField(max_length=255, verbose_name='Размер в сложенном состоянии')
+#     unfolded_size = models.CharField(max_length=255, verbose_name='Размер в разложенном состоянии')

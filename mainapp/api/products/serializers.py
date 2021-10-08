@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from itertools import chain
 
 from ...models import *
 
@@ -37,6 +38,10 @@ class StatusForProductSerializer(serializers.ModelSerializer):
         ]
 
 
+class SubImagesForProductSerializer(serializers.Serializer):
+    sub_image = serializers.URLField()
+
+
 # main serializers #######################
 
 
@@ -55,7 +60,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_in_sale(obj):
-        return Sale.objects.get(id=obj.sale.id).is_active
+        return obj.sale.is_active
 
 
 class ProductRetrieveSerializer(serializers.ModelSerializer):
@@ -70,8 +75,11 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'category', 'subcategory', 'name', 'slug', 'description',
             'price', 'quantity', 'sale', 'is_popular', 'status', 'images',
+            #'child_product_data',
         ]
+        depth = 0
 
     @staticmethod
     def get_images(obj):
-        return SubImage.objects.filter(product=obj.id).values()
+        return chain(Product.objects.filter(id=obj.id).values_list('image', flat=True),     # это наверняка можно написать лучше
+                     obj.images.all().values_list('sub_image', flat=True))
