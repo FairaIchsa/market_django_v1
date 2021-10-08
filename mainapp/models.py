@@ -1,6 +1,17 @@
 from django.db import models
 
 
+class MenuCategory(models.Model):
+    class Meta:
+        verbose_name_plural = 'Menu categories'
+
+    name = models.CharField(max_length=255, verbose_name='Название категории')
+    url = models.URLField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
