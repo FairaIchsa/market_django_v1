@@ -1,4 +1,13 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
+
+# User = get_user_model()
+
+
+class User(AbstractUser):
+    def __str__(self):
+        return self.username
 
 
 class MenuCategory(models.Model):
@@ -49,8 +58,6 @@ class Subcategory(models.Model):
 
 
 class Sale(models.Model):   # мб имеет смысл добавить поле name?
-    class Meta:
-        verbose_name_plural = 'Sales'
 
     is_active = models.BooleanField(default=True)
     sale_modifier = models.PositiveIntegerField(default=0)      # ограничить числом 100
@@ -71,8 +78,6 @@ class Status(models.Model):
 
 
 class Product(models.Model):
-    class Meta:
-        verbose_name_plural = 'Products'
 
     category = models.ForeignKey(Category, verbose_name='Категория', related_name='product', on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, verbose_name='Подкатегория', on_delete=models.CASCADE,
@@ -93,8 +98,6 @@ class Product(models.Model):
 
 
 class SubImage(models.Model):
-    class Meta:
-        verbose_name_plural = 'Sub Images'
 
     product = models.ForeignKey(Product, verbose_name='Товар', related_name='images', on_delete=models.CASCADE)
     sub_image = models.URLField(verbose_name='Дополнительное изображение', null=True, blank=True)
@@ -104,8 +107,6 @@ class SubImage(models.Model):
 
 
 class Ball(models.Model):
-    class Meta:
-        verbose_name_plural = 'Balls'
 
     product = models.OneToOneField(Product, verbose_name='Товар', related_name='child_product_ball',
                                    on_delete=models.CASCADE)
@@ -116,8 +117,6 @@ class Ball(models.Model):
 
 
 class TennisTable(models.Model):
-    class Meta:
-        verbose_name_plural = 'Tennis tables'
 
     product = models.OneToOneField(Product, verbose_name='Товар', related_name='child_product_tennis_table',
                                    on_delete=models.CASCADE)

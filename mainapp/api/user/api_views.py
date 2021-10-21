@@ -1,4 +1,18 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
 
 from .serializers import *
 from ...models import *
+
+
+class UserAPIView(APIView):
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            serializer = UserSerializer(user)
+            print(serializer)
+            print(serializer.data)
+            return Response(serializer.data)
+        return Response('User is not authenticated')
+
