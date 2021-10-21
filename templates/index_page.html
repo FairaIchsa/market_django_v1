@@ -8,14 +8,19 @@
     <div>
         <h1>Product:</h1>
         <h2><a href="{% url 'mainapp:api:product:all' %}">Все товары</a></h2>
+        <h2><a href="{% url 'mainapp:api:product:all' %}?category=balls">Все мячи</a></h2>
+        <h2><a href="{% url 'mainapp:api:product:all' %}?category=tennis_tables">Все теннисные столы</a></h2>
+        <br>
         <h2><a href="{% url 'mainapp:api:product:by-id' 1 %}">Конкретный товар (с id=1)</a></h2>
     </div>
+    <br>
     <div>
         <h1>Other:</h1>
         <h2><a href="{% url 'mainapp:api:other:menu-categories' %}">Категории меню</a></h2>
         <h2><a href="{% url 'mainapp:api:other:product-categories' %}">Категории товаров</a></h2>
         <h2><a href="{% url 'mainapp:api:other:slider-info' %}">Информация для слайдера</a></h2>
     </div>
+    <br>
     <div>
         <h1>User</h1>
         <h2><a href="{% url 'mainapp:api:user:current-user' %}">Данные пользователя</a></h2>
