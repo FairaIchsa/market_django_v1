@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from ...models import *
+from ...product_models import Category, Subcategory
+from ...other_models import *
 
 
 class MenuCategoryListSerializer(serializers.ModelSerializer):
@@ -11,7 +12,17 @@ class MenuCategoryListSerializer(serializers.ModelSerializer):
         ]
 
 
+class SubCategoryListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subcategory
+        fields = [
+            'name', 'slug',
+        ]
+
+
 class CategoryListSerializer(serializers.ModelSerializer):
+    subcategories = SubCategoryListSerializer(many=True)
+
     class Meta:
         model = Category
         fields = [

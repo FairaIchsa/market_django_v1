@@ -5,7 +5,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import PageNumberPagination
 
 from .serializers import *
-from ...models import *
+from ...product_models import *
 
 
 class ProductListPagination(PageNumberPagination):
@@ -16,8 +16,6 @@ class ProductListPagination(PageNumberPagination):
             ('page', self.page.number),
             ('page_size', self.page_size),
             ('page_count', self.page.paginator.num_pages),
-            ('next', self.get_next_link()),
-            ('previous', self.get_previous_link()),
             ('items', data)
         ]))
 

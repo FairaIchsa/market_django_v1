@@ -1,7 +1,8 @@
 from rest_framework.generics import ListAPIView
 
 from .serializers import *
-from ...models import *
+from ...product_models import Category
+from ...other_models import MenuCategory, SliderInfo
 
 
 class MenuCategoryListApiView(ListAPIView):

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from itertools import chain
 
-from ...models import *
+from ...product_models import *
 
 
 # sub serializers #######################
@@ -30,11 +30,18 @@ class SaleForProductSerializer(serializers.ModelSerializer):
         ]
 
 
-class StatusForProductSerializer(serializers.ModelSerializer):
+# class StatusForProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Status
+#         fields = [
+#             'name', 'text',
+#         ]
+
+class DescriptionForProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Status
+        model = Description
         fields = [
-            'name', 'text',
+            'content', 'position',
         ]
 
 
@@ -65,13 +72,16 @@ class ProductListSerializer(serializers.ModelSerializer):
     category = CategoryForProductSerializer()
     subcategory = SubcategoryForProductSerializer()
     in_sale = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    # status = StatusForProductSerializer()
 
     class Meta:
         model = Product
         fields = [
             'id', 'category', 'subcategory', 'name', 'slug', 'description',
-            'price', 'quantity', 'in_sale', 'is_popular', 'image',
+            'price', 'quantity', 'in_sale', 'is_popular', 'status', 'image',
         ]
+        depth = 1
 
     @staticmethod
     def get_in_sale(obj):
@@ -79,13 +89,20 @@ class ProductListSerializer(serializers.ModelSerializer):
             return obj.sale.is_active
         return False
 
+    @staticmethod
+    def get_description(obj):
+        if obj.description.first() is not None:
+            return obj.description.get(position=0).content
+        return None
+
 
 class ProductRetrieveSerializer(serializers.ModelSerializer):
     category = CategoryForProductSerializer()
     subcategory = SubcategoryForProductSerializer()
     sale = SaleForProductSerializer()
+    description = DescriptionForProductSerializer(many=True)
     images = serializers.SerializerMethodField()
-    status = StatusForProductSerializer()
+    # status = StatusForProductSerializer()
     child_product_data = serializers.SerializerMethodField()
 
     class Meta:
@@ -98,10 +115,9 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
         depth = 0
 
     @staticmethod
-    def get_images(obj):
+    def get_images(obj):    # это наверняка можно написать лучше
         return chain(Product.objects.filter(id=obj.id).values_list('image', flat=True),
                      obj.images.all().values_list('sub_image', flat=True))
-            # это наверняка можно написать лучше
 
     @staticmethod
     def get_child_product_data(obj):
