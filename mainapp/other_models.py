@@ -16,8 +16,8 @@ class SliderInfo(models.Model):
     class Meta:
         verbose_name_plural = 'Slider info'
 
-    image = models.ImageField(verbose_name='Изображение')
-    header = models.TextField(verbose_name='Заголовок')
+    img = models.ImageField(verbose_name='Изображение')
+    main = models.TextField(verbose_name='Заголовок')
     base = models.TextField(verbose_name='Содержание')
 
     def __str__(self):

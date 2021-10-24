@@ -9,8 +9,6 @@ class UserAPIView(APIView):
         if self.request.user.is_authenticated:
             user = self.request.user
             serializer = UserSerializer(user)
-            print(serializer)
-            print(serializer.data)
             return Response(serializer.data)
         return Response('User is not authenticated')
 

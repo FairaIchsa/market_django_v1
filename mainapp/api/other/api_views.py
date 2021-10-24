@@ -17,4 +17,4 @@ class CategoryListApiView(ListAPIView):
 
 class SliderInfoListApiView(ListAPIView):
     queryset = SliderInfo.objects.all()
-    serializer_class = SliderInfoListSerializer
+    serializer_class = SliderInfoSerializer

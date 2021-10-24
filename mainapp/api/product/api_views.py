@@ -26,7 +26,7 @@ class ProductListApiView(ListAPIView):  # добавить пагинацию
     pagination_class = ProductListPagination
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().order_by('id')
         category = self.request.query_params.get('category')
         if category:
             return queryset.filter(category__slug=category)

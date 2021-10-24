@@ -31,9 +31,19 @@ class CategoryListSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-class SliderInfoListSerializer(serializers.ModelSerializer):
+class SliderTextSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SliderText
+        fields = [
+            'id', 'main', 'base',
+        ]
+
+
+class SliderInfoSerializer(serializers.ModelSerializer):
+    content = SliderTextSerializer(many=True)
+
     class Meta:
         model = SliderInfo
-        exclude = [
-            'id',
+        fields = [
+            'id', 'img', 'main', 'base', 'content',
         ]

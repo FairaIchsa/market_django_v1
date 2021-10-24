@@ -85,7 +85,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_in_sale(obj):
-        if obj.sale:
+        if obj.sale is not None:
             return obj.sale.is_active
         return False
 
