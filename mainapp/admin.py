@@ -29,7 +29,6 @@ admin.site.register(Description)
 admin.site.register(SubImage)
 admin.site.register(MenuCategory)
 admin.site.register(SliderInfo)
-admin.site.register(SliderText)
 admin.site.register(Ball, BallAdmin)
 admin.site.register(TennisTable, TennisTableAdmin)
 
