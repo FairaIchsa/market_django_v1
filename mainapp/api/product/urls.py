@@ -6,6 +6,6 @@ from .api_views import *
 app_name = 'product'
 
 urlpatterns = [
-    path('all/', ProductListAPIView.as_view(), name='all'),
-    path('get_by_id/<int:pk>', ProductRetrieveAPIView.as_view(), name='by-id'),
+    path('all/', ProductModelViewSet.as_view({'get': 'list'}), name='all'),
+    path('get_by_id/<int:pk>', ProductModelViewSet.as_view({'get': 'retrieve'}), name='by-id'),
 ]
