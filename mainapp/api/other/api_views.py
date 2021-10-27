@@ -10,7 +10,7 @@ from ...other_models import MenuCategory, SliderInfo
 
 
 class SliderInfoPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 1
 
     def get_paginated_response(self, data):
         return Response(OrderedDict([
@@ -30,6 +30,6 @@ class CategoryListApiView(ListAPIView):
 
 
 class SliderInfoListApiView(ListAPIView):
-    queryset = SliderInfo.objects.all()
+    queryset = SliderInfo.objects.all().order_by('id')
     serializer_class = SliderInfoSerializer
     pagination_class = SliderInfoPagination
