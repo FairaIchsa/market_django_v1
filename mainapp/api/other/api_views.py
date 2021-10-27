@@ -19,17 +19,17 @@ class SliderInfoPagination(PageNumberPagination):
         ]))
 
 
-class MenuCategoryListApiView(ListAPIView):
+class MenuCategoryListAPIView(ListAPIView):
     queryset = MenuCategory.objects.all()
     serializer_class = MenuCategoryListSerializer
 
 
-class CategoryListApiView(ListAPIView):
+class CategoryListAPIView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
 
 
-class SliderInfoListApiView(ListAPIView):
+class SliderInfoListAPIView(ListAPIView):
     queryset = SliderInfo.objects.all().order_by('id')
     serializer_class = SliderInfoSerializer
     pagination_class = SliderInfoPagination

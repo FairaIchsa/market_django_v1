@@ -20,7 +20,7 @@ class ProductListPagination(PageNumberPagination):
         ]))
 
 
-class ProductListApiView(ListAPIView):  # добавить пагинацию
+class ProductListAPIView(ListAPIView):  # добавить пагинацию
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     pagination_class = ProductListPagination
@@ -33,7 +33,7 @@ class ProductListApiView(ListAPIView):  # добавить пагинацию
         return queryset
 
 
-class ProductRetrieveApiView(RetrieveAPIView):
+class ProductRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductRetrieveSerializer
 
