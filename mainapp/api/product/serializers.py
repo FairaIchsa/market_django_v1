@@ -73,7 +73,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     subcategory = SubcategoryForProductSerializer()
     in_sale = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
-    # status = StatusForProductSerializer()
+    status = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -81,7 +81,7 @@ class ProductListSerializer(serializers.ModelSerializer):
             'id', 'category', 'subcategory', 'name', 'slug', 'description',
             'price', 'quantity', 'in_sale', 'is_popular', 'status', 'image',
         ]
-        depth = 1
+        depth = 0
 
     @staticmethod
     def get_in_sale(obj):
@@ -95,6 +95,15 @@ class ProductListSerializer(serializers.ModelSerializer):
             return obj.description.get(position=0).content
         return None
 
+    @staticmethod
+    def get_status(obj):
+        if obj.status is not None:
+            return {
+                'name': obj.status,
+                'text': obj.get_status_display(),
+            }
+        return None
+
 
 class ProductRetrieveSerializer(serializers.ModelSerializer):
     category = CategoryForProductSerializer()
@@ -102,7 +111,7 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
     sale = SaleForProductSerializer()
     description = DescriptionForProductSerializer(many=True)
     images = serializers.SerializerMethodField()
-    # status = StatusForProductSerializer()
+    status = serializers.SerializerMethodField()
     child_product_data = serializers.SerializerMethodField()
 
     class Meta:
@@ -113,6 +122,15 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
             'child_product_data',
         ]
         depth = 0
+
+    @staticmethod
+    def get_status(obj):
+        if obj.status is not None:
+            return {
+                'name': obj.status,
+                'text': obj.get_status_display(),
+            }
+        return None
 
     @staticmethod
     def get_images(obj):    # это наверняка можно написать лучше
