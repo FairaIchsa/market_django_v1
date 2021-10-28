@@ -1,3 +1,6 @@
+from django.apps import AppConfig
+from django.apps import apps
+
 from rest_framework import serializers
 from itertools import chain
 
@@ -74,12 +77,13 @@ class ProductListSerializer(serializers.ModelSerializer):
     in_sale = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
+    main_specifications = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = [
             'id', 'category', 'subcategory', 'name', 'slug', 'description',
-            'price', 'quantity', 'in_sale', 'is_popular', 'status', 'image',
+            'price', 'quantity', 'in_sale', 'is_popular', 'status', 'main_specifications', 'image',
         ]
         depth = 0
 
@@ -103,6 +107,35 @@ class ProductListSerializer(serializers.ModelSerializer):
                 'text': obj.get_status_display(),
             }
         return None
+
+    @staticmethod
+    def get_main_specifications(obj):
+        MAIN_SPECIFICATIONS = {     # спецификации для определенной категории
+            'balls': (
+                ('size', 'Размер'),
+            ),
+            'tennis_tables': (
+                ('foldable', 'Складной'),
+                ('unfolded_size', 'Размер в разложенном состоянии'),
+            ),
+        }
+        CHILD_OBJECTS = {
+            'balls': 'child_product_ball',
+            'tennis_tables': 'child_product_tennis_table',
+        }
+        category = obj.category.slug
+        child_obj = getattr(obj, CHILD_OBJECTS[category])
+        specifications = MAIN_SPECIFICATIONS[category]
+        serialized = []
+        for specification in specifications:
+            field_value = getattr(child_obj, specification[0])
+            spescification_dict = {
+                'type': specification[0],
+                'title': specification[1],
+                'data': field_value
+            }
+            serialized.append(spescification_dict)
+        return serialized
 
 
 class ProductRetrieveSerializer(serializers.ModelSerializer):
