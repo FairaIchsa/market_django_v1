@@ -1,0 +1,169 @@
+// api v.1.0.3
+{
+    "productById": {
+        "id": 0,
+        "category": {
+            "name": "беговая дорожка",
+            "slug": "some-category"
+        },
+        "subcategory": {
+            "name": "скоростная",
+            "slug": "some-subcategory"
+        },
+        "name": "string",
+        "slug": "string",
+        "price": 0.00,
+        "quantity": 0, // осталось на складе
+        "sale": {
+            "is_sale": true,
+            "sale_modifier": 15 // в процентах от 0 до 100
+        },
+        "is_popular": true,
+        "status": {
+            "name": "discontinued",
+            "text": "нет в наличии" // other examples {"name": "popular", "text": "популярный", "name": "best_seller", "text": "Хит продаж" }
+        },
+        
+        "images": [
+            "mainImgUrl",
+            "subImgUrl",
+            "sub2ImgUrl"
+        ],
+        "description": [
+            {
+                "content": "short description",
+                "position": 0
+            },
+            {
+                "content": "very very mnoga text (1 abzac)",
+                "position": 1
+            },
+            {
+                "content": "very very mnoga text (1 abzac)",
+                "position": 2
+            }
+        ],
+        "child_product_data": { // данные из модели дочернего продукта (например мяч) 
+            "id": 0,
+            "size": "string",
+            "surface": "string",
+            "diameter": 0
+        }
+    },
+
+    "productListAll": { 
+        "page": 1,
+        "page_size": 20,
+        "page_count": 10,
+        "items": [
+            {
+                "id": 0,
+                "category": {
+                    "name": "беговая дорожка",
+                    "slug": "some-category"
+                },
+                "subcategory": {
+                    "name": "скоростная",
+                    "slug": "some-subcategory"
+                },
+                "name": "string",
+                "slug": "string",
+                "description": "string",
+                "price": 0.00,
+                "quantity": 0,
+                "in_sale": true,
+                "is_popular": true,
+                "status": {
+                    "name": "discontinued",
+                    "text": "нет в наличии" // other examples {"name": "popular", "text": "популярный", "name": "best_seller", "text": "Хит продаж" }
+                },
+                "main_specifications": [
+                    {
+                        "type": "length",
+                        "title": "длина",
+                        "data": "0,15 m"
+                    },
+                    {
+                        "type": "width",
+                        "title": "ширина",
+                        "data": "0,15 m"
+                    }
+                ],
+                "image": "mainImgUrl"
+            }
+        ]
+    },
+
+    "productsCategories":{
+        "categories": [
+            {
+                "name": "беговая дорожка",
+                "slug": "some-category",
+                "subcategories": [
+                    {
+                        "name": "скоростная",
+                        "slug": "some-subcategory"
+                    }
+                ]
+            }
+        ]
+    },
+
+    "mainNavigation": {
+        "categories": [
+            {
+                "name": "каталог",
+                "slug": "catalog"
+            },
+            {
+                "name": "о нас",
+                "slug": "about-us"
+            }
+        ]
+    },
+
+    "sliderData":{
+        "slides_count": 2,
+        "slides": [
+            {
+                "id": 1,
+                "img": "imgUrl",
+                "title": {"main": "string", "base": "string"},
+                "content": {
+                    "text_1": {"main": "string", "base": "string"},
+                    "text_2": "string",
+                    "text_3": {"main": "string", "base": "string"},
+                    "text_4": "string"
+                }
+            },
+            {
+                "id": 2,
+                "img": "imgUrl",
+                "title": {"main": "string", "base": "string"},
+                "content": {
+                    "text_1": {"main": "string", "base": "string"},
+                    "text_2": "string",
+                    "text_3": {"main": "string", "base": "string"},
+                    "text_4": "string"
+                }
+            }
+        ]
+
+    },
+
+    "userData":{
+        "id": 0,
+        "username": "killer_228",
+        "firstname": "sanya",
+        "secondname": "pushkin",
+        "phone": "8-800-555-35-55",
+        "ship_adress": "улица Пушкина, дом колотушкина",
+        "email": "string@mail.com",
+        "fathername": "sergeevich",
+        "birthday": "date type",
+        "is_anonymous": false
+    }
+
+}
+  
+  
