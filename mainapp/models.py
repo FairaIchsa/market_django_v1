@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     # уже есть id, username, password, first_name, last_name, email,
     # is_superuser, is_staff, is_active, last_login, date_joined
-    father_name = models.CharField(max_length=150, blank=True)
+    father_name = models.CharField(max_length=150, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, unique=True)
     ship_address = models.CharField(max_length=255, blank=True)
