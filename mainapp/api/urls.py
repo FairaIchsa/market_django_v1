@@ -3,7 +3,8 @@ from django.urls import path, include
 app_name = 'api'
 
 urlpatterns = [
-    path('', include('mainapp.api.other.urls', namespace='other')),
     path('product/', include('mainapp.api.product.urls', namespace='product')),
-    path('auth/', include('mainapp.api.user.urls', namespace='user')),
+    path('profile/', include('mainapp.api.profile.urls', namespace='profile')),
+    path('auth/', include('mainapp.api.auth.urls', namespace='auth')),
+    path('', include('mainapp.api.other.urls', namespace='other')),
 ]

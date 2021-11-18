@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ...models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserDataSerializer(serializers.ModelSerializer):
     firstname = serializers.CharField(source='first_name')
     secondname = serializers.CharField(source='last_name')
     fathername = serializers.CharField(source='father_name')

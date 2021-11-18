@@ -11,27 +11,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='user',
+            model_name='profile',
             name='anonymous',
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='user',
+            model_name='profile',
             name='birthday',
             field=models.DateField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='user',
+            model_name='profile',
             name='father_name',
             field=models.CharField(blank=True, max_length=150),
         ),
         migrations.AddField(
-            model_name='user',
+            model_name='profile',
             name='phone',
             field=models.CharField(blank=True, max_length=15, unique=True),
         ),
         migrations.AddField(
-            model_name='user',
+            model_name='profile',
             name='ship_address',
             field=models.CharField(blank=True, max_length=255),
         ),

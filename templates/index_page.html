@@ -22,8 +22,12 @@
     </div>
     <br>
     <div>
-        <h1>User</h1>
-        <h2><a href="{% url 'mainapp:api:user:current-user' %}">Данные пользователя</a></h2>
+        <h1>Profile</h1>
+        <h2><a href="{% url 'mainapp:api:profile:info' %}">Данные пользователя</a></h2>
+    </div>
+    <div>
+        <h1>Auth</h1>
+        <h2><a href="{% url 'mainapp:api:auth:register' %}">Регистрация</a></h2>
     </div>
 </body>
 </html>
