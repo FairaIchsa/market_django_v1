@@ -13,7 +13,7 @@ from .serializers import *
 from ...models import User
 
 
-# @method_decorator(csrf_protect, name='dispatch')
+@method_decorator(csrf_protect, name='dispatch')
 class SignUpAPIView(APIView):
     permission_classes = (AllowAny,)
 
@@ -43,7 +43,7 @@ class SignUpAPIView(APIView):
             return Response({'status': 'something went wrong('})
 
 
-# @method_decorator(csrf_protect, name='dispatch')
+@method_decorator(csrf_protect, name='dispatch')
 class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
 
@@ -72,9 +72,9 @@ class LogoutAPIView(APIView):
             return Response({'status': 'something went wrong('})
 
 
-# @method_decorator(ensure_csrf_cookie, name='dispatch')
-# class GetCSRFTokenAPIView(APIView):
-#     permission_classes = (AllowAny, )
-#
-#     def get(self, request):
-#         return Response({'success':  'CSRF cookie set'})
+@method_decorator(ensure_csrf_cookie, name='dispatch')
+class GetCSRFTokenAPIView(APIView):
+    permission_classes = (AllowAny, )
+
+    def get(self, request):
+        return Response({'success':  'CSRF cookie set'})
