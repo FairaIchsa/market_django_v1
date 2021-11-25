@@ -1,12 +1,11 @@
 from collections import OrderedDict
 
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
 
 from .serializers import *
-from ...product_models import *
+from mainapp.models.product_models import *
 
 
 class ProductListPagination(PageNumberPagination):

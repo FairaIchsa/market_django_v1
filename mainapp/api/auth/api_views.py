@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 
 from .serializers import *
-from ...models import User
+from mainapp.models.user_models import User
 
 
 @method_decorator(csrf_protect, name='dispatch')

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from ...product_models import Category, Subcategory
-from ...models import User
+from mainapp.models.user_models import User
 
 
 class SignUpOutputSerializer(serializers.ModelSerializer):

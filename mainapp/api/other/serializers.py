@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from ...product_models import Category, Subcategory
-from ...other_models import *
+from mainapp.models.product_models import Category, Subcategory
+from mainapp.models.other_models import *
 
 
 class MenuCategoryListSerializer(serializers.ModelSerializer):

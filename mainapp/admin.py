@@ -1,9 +1,9 @@
 from django.forms import ModelChoiceField
 from django.contrib import admin
 
-from .models import *
-from .product_models import *
-from .other_models import *
+from mainapp.models.user_models import *
+from mainapp.models.product_models import *
+from mainapp.models.other_models import *
 
 
 class BallAdmin(admin.ModelAdmin):

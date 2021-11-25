@@ -1,14 +1,9 @@
-from collections import OrderedDict
-
-from django.shortcuts import get_object_or_404
-
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
-from rest_framework.pagination import PageNumberPagination
 
 from .serializers import *
-from ...product_models import Category
-from ...other_models import MenuCategory, SliderInfo
+from mainapp.models.product_models import Category
+from mainapp.models.other_models import MenuCategory, SliderInfo
 
 
 class MenuCategoryListAPIView(ListAPIView):

@@ -1,10 +1,7 @@
-from django.apps import AppConfig
-from django.apps import apps
-
 from rest_framework import serializers
 from itertools import chain
 
-from ...product_models import *
+from mainapp.models.product_models import *
 
 
 # sub serializers #######################

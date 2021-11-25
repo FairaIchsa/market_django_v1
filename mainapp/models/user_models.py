@@ -45,7 +45,7 @@ class User(AbstractUser):
     birthday = models.DateField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     ship_address = models.CharField(max_length=255, blank=True, null=True)
-    anonymous = models.BooleanField(default=False)  # is_anonymous занято каким-то методом и джанго ругается
+    anonymous = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
