@@ -24,18 +24,15 @@ class UpdateUserDataAPIView(APIView):
         data = self.request.data
         user = self.request.user
 
-        try:
-            user.first_name = data['firstname']
-            user.last_name = data['secondname']
-            user.father_name = data['fathername']
-            user.phone = data['phone']
-            user.ship_address = data['ship_adress']
-            user.birthday = data['birthday']
+        user.first_name = data['firstname'] if data['firstname'] is not None else user.first_name
+        user.last_name = data['secondname']
+        user.father_name = data['fathername']
+        user.phone = data['phone']
+        user.ship_address = data['ship_adress']
+        user.birthday = data['birthday']
 
-            user.save()
-            return Response({'status': 'success'})
-        except:
-            return Response({'status': 'something went wrong'})
+        user.save()
+        return Response({'status': 'success'})
 
 
 class UpdateUserPasswordAPIView(APIView):
@@ -46,9 +43,6 @@ class UpdateUserPasswordAPIView(APIView):
         user = self.request.user
         data = self.request.data
 
-        try:
-            new_password = data['new_password']
-            user.set_password(new_password)
-            return Response({'status': 'success'})
-        except:
-            return Response({'status': 'something went wrong'})
+        new_password = data['new_password']
+        user.set_password(new_password)
+        return Response({'status': 'success'})

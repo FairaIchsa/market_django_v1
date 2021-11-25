@@ -29,16 +29,13 @@ class SignUpAPIView(APIView):
         birthday = data['birthday']
 
         if User.objects.filter(email=email).exists():
-            return Response({'error': 'username already exists.'})
+            return Response({'error': 'email already exists.'})
 
-        try:
-            user = User.objects.create_user(
-                email=email, password=password, first_name=first_name, last_name=last_name,
-                father_name=father_name, phone=phone, ship_address=ship_address, birthday=birthday
-            )
-            return Response(SignUpOutputSerializer(user).data)
-        except:
-            return Response({'status': 'something went wrong('})
+        user = User.objects.create_user(
+            email=email, password=password, first_name=first_name, last_name=last_name,
+            father_name=father_name, phone=phone, ship_address=ship_address, birthday=birthday
+        )
+        return Response(SignUpOutputSerializer(user).data)
 
 
 @method_decorator(csrf_protect, name='dispatch')
@@ -65,11 +62,8 @@ class LogoutAPIView(APIView):
     authentication_classes = (SessionAuthentication,)
 
     def post(self, request):
-        try:
-            auth.logout(request)
-            return Response({'status': 'logged out'})
-        except:
-            return Response({'status': 'something went wrong('})
+        auth.logout(request)
+        return Response({'status': 'logged out'})
 
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')

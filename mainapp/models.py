@@ -43,8 +43,8 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=150, blank=True, null=True)
     father_name = models.CharField(max_length=150, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
-    phone = models.CharField(max_length=15, blank=True)
-    ship_address = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    ship_address = models.CharField(max_length=255, blank=True, null=True)
     anonymous = models.BooleanField(default=False)  # is_anonymous занято каким-то методом и джанго ругается
 
     USERNAME_FIELD = 'email'
